@@ -1,7 +1,7 @@
 <template>
   <div class="calc-wrap">
     <md-content>
-      <div class="result-field">{{ result || 0 }}</div>
+      <div class="result-field">{{ result }}</div>
     </md-content>
     <div class="d-flex">
       <md-button class="md-primary cell cell-border" @click="allClean"
@@ -13,7 +13,11 @@
       <md-button class="md-primary cell cell-border" @click="percent"
         >%</md-button
       >
-      <md-button class="md-raised md-primary cell">÷</md-button>
+      <md-button
+        class="md-raised md-primary cell"
+        @click="makeOperation('divide')"
+        >÷</md-button
+      >
     </div>
     <div class="d-flex">
       <md-button class="cell cell-border" @click="inputNumber('7')"
@@ -25,7 +29,11 @@
       <md-button class="cell cell-border" @click="inputNumber('9')"
         >9</md-button
       >
-      <md-button class="md-raised md-primary cell">×</md-button>
+      <md-button
+        class="md-raised md-primary cell"
+        @click="makeOperation('multiply')"
+        >×</md-button
+      >
     </div>
     <div class="d-flex">
       <md-button class="cell cell-border" @click="inputNumber('4')"
@@ -37,7 +45,11 @@
       <md-button class="cell cell-border" @click="inputNumber('6')"
         >6</md-button
       >
-      <md-button class="md-raised md-primary cell">-</md-button>
+      <md-button
+        class="md-raised md-primary cell"
+        @click="makeOperation('subtract')"
+        >-</md-button
+      >
     </div>
     <div class="d-flex">
       <md-button class="cell cell-border" @click="inputNumber('1')"
@@ -49,14 +61,18 @@
       <md-button class="cell cell-border" @click="inputNumber('3')"
         >3</md-button
       >
-      <md-button class="md-raised md-primary cell">+</md-button>
+      <md-button class="md-raised md-primary cell" @click="makeOperation('add')"
+        >+</md-button
+      >
     </div>
     <div class="d-flex">
       <md-button class="cell cell-border cell-zero" @click="inputNumber('0')"
         >0</md-button
       >
       <md-button class="cell cell-border" @click="decimal">,</md-button>
-      <md-button class="md-raised md-primary cell">=</md-button>
+      <md-button class="md-raised md-primary cell" @click="calculation"
+        >=</md-button
+      >
     </div>
   </div>
 </template>
@@ -65,11 +81,17 @@
 export default {
   name: "Calculator",
   data: () => ({
-    result: ""
+    prevResult: null,
+    result: "0",
+    operation: null,
+    operationClicked: false
   }),
   methods: {
     allClean() {
-      this.result = "";
+      this.result = "0";
+      this.operationClicked = false;
+      this.operation = null;
+      this.prevResult = null;
     },
     changeSign() {
       if (!this.result || this.result === "0") return;
@@ -79,6 +101,10 @@ export default {
       this.result = `${parseFloat(this.result) / 100}`;
     },
     inputNumber(value) {
+      if (this.operationClicked) {
+        this.result = "";
+        this.operationClicked = false;
+      }
       if (this.result === "0") {
         this.result = value;
       } else this.result += value;
@@ -86,6 +112,33 @@ export default {
     decimal() {
       if (this.result === "") this.result += "0.";
       if (this.result.indexOf(".") === -1) this.result += ".";
+    },
+    makeOperation(operation) {
+      this.operationClicked = true;
+      this.operation = operation;
+      this.prevResult = this.result;
+    },
+    calculation() {
+      if (!this.operation) return;
+      let res = null;
+      switch (this.operation) {
+        case "divide":
+          res = parseFloat(this.prevResult) / parseFloat(this.result);
+          break;
+        case "multiply":
+          res = parseFloat(this.prevResult) * parseFloat(this.result);
+          break;
+        case "subtract":
+          res = parseFloat(this.prevResult) - parseFloat(this.result);
+          break;
+        case "add":
+          res = parseFloat(this.prevResult) + parseFloat(this.result);
+          break;
+      }
+      this.result = `${res}`;
+      this.operationClicked = false;
+      this.operation = null;
+      this.prevResult = null;
     }
   }
 };
