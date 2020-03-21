@@ -7,7 +7,10 @@ const historyStore = {
       subtract: "-",
       add: "+"
     },
-    history: []
+    history: [
+      "2020-3-21 23:3:29 8 * 6 = 48",
+      "2020-3-21 23:3:50 56 / 3 = 18.666666666666668"
+    ]
   },
   getters: {
     operator: ({ operator }) => operator,

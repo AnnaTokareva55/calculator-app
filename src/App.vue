@@ -1,16 +1,21 @@
 <template>
   <div id="app">
-    <Calculator class="calc" />
+    <div class="d-flex">
+      <Calculator class="calc" />
+      <History class="hist" />
+    </div>
   </div>
 </template>
 
 <script>
 import Calculator from "./components/Calculator.vue";
+import History from "./components/History.vue";
 
 export default {
   name: "App",
   components: {
-    Calculator
+    Calculator,
+    History
   }
 };
 </script>
@@ -27,8 +32,13 @@ export default {
 }
 
 .calc {
-  width: 65%;
+  width: 60%;
   border: 0.5px solid gray;
+}
+
+.hist {
+  width: 40%;
+  border: 1px solid gray;
 }
 
 .d-flex {
