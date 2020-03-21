@@ -39,4 +39,3 @@ export default {
   justify-content: flex-end;
 }
 </style>
-<style src="./App.scss" lang="scss"></style>
