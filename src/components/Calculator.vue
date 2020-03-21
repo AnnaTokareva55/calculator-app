@@ -36,6 +36,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
+
 export default {
   name: "Calculator",
   data: () => ({
@@ -44,7 +47,21 @@ export default {
     operation: null,
     operationClicked: false
   }),
+  computed: {
+    ...mapGetters("history", ["operator"]),
+    dateTime() {
+      let date = new Date();
+      return `${date.getFullYear()}-${date.getMonth() +
+        1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} `;
+    }
+  },
   methods: {
+    ...mapActions("history", ["addToHistory"]),
+    _clean() {
+      this.operationClicked = false;
+      this.operation = null;
+      this.prevResult = null;
+    },
     allClean() {
       this.result = "0";
       this.operationClicked = false;
@@ -78,6 +95,10 @@ export default {
     },
     calculation() {
       if (!this.operation) return;
+      let date = this.dateTime;
+      let exp = `${this.prevResult} ${this.operator[this.operation]} ${
+        this.result
+      } = `;
       let res = null;
       switch (this.operation) {
         case "divide":
@@ -94,9 +115,10 @@ export default {
           break;
       }
       this.result = `${res}`;
-      this.operationClicked = false;
-      this.operation = null;
-      this.prevResult = null;
+      exp += this.result;
+      let historyEl = date + exp;
+      this.addToHistory(historyEl);
+      this._clean();
     }
   }
 };
