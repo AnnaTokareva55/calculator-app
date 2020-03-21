@@ -7,8 +7,12 @@
       <md-button class="md-primary cell cell-border" @click="allClean"
         >AC</md-button
       >
-      <md-button class="md-primary cell cell-border">+/-</md-button>
-      <md-button class="md-primary cell cell-border">%</md-button>
+      <md-button class="md-primary cell cell-border" @click="changeSign"
+        >+/-</md-button
+      >
+      <md-button class="md-primary cell cell-border" @click="percent"
+        >%</md-button
+      >
       <md-button class="md-raised md-primary cell">÷</md-button>
     </div>
     <div class="d-flex">
@@ -51,7 +55,7 @@
       <md-button class="cell cell-border cell-zero" @click="inputNumber('0')"
         >0</md-button
       >
-      <md-button class="cell cell-border">,</md-button>
+      <md-button class="cell cell-border" @click="decimal">,</md-button>
       <md-button class="md-raised md-primary cell">=</md-button>
     </div>
   </div>
@@ -67,10 +71,21 @@ export default {
     allClean() {
       this.result = "";
     },
+    changeSign() {
+      if (!this.result || this.result === "0") return;
+      this.result = `${-1 * this.result}`;
+    },
+    percent() {
+      this.result = `${parseFloat(this.result) / 100}`;
+    },
     inputNumber(value) {
       if (this.result === "0") {
         this.result = value;
       } else this.result += value;
+    },
+    decimal() {
+      if (this.result === "") this.result += "0.";
+      if (this.result.indexOf(".") === -1) this.result += ".";
     }
   }
 };
