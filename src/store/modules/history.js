@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const historyStore = {
   namespaced: true,
   state: {
@@ -7,22 +9,26 @@ const historyStore = {
       subtract: "-",
       add: "+"
     },
-    history: [
-      "2020-3-21 23:3:29 8 * 6 = 48",
-      "2020-3-21 23:3:50 56 / 3 = 18.666666666666668",
-      "2020-3-21 23:3:29 8 * 6 = 48"
-    ]
+    history: []
   },
   getters: {
     operator: ({ operator }) => operator,
     historyList: ({ history }) => history
   },
   mutations: {
+    LOAD_HISTORY(state, data) {
+      state.history = data;
+    },
     ADD_OPERATION(state, newEl) {
       state.history.push(newEl);
     }
   },
   actions: {
+    getHistory({ commit }) {
+      axios.get("/api/history").then(response => {
+        commit("LOAD_HISTORY", response.data);
+      });
+    },
     addToHistory({ commit }, newEl) {
       commit("ADD_OPERATION", newEl);
     }

@@ -12,11 +12,18 @@
 //<div v-for="(item, index) in historyList" :key="index">{{item}}</div>
 <script>
 import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "History",
   computed: {
     ...mapGetters("history", ["historyList"])
+  },
+  mounted() {
+    this.getHistory();
+  },
+  methods: {
+    ...mapActions("history", ["getHistory"])
   }
 };
 </script>
