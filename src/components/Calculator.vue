@@ -1,37 +1,39 @@
 <template>
   <div class="calc-wrap">
-    <md-content>
+    <div>
       <div class="result-field">{{ result }}</div>
+    </div>
+    <md-content>
+      <div class="d-flex">
+        <md-button class="md-primary cell cell-border" @click="allClean">AC</md-button>
+        <md-button class="md-primary cell cell-border" @click="changeSign">+/-</md-button>
+        <md-button class="md-primary cell cell-border" @click="percent">%</md-button>
+        <md-button class="md-raised md-primary cell" @click="makeOperation('divide')">÷</md-button>
+      </div>
+      <div class="d-flex">
+        <md-button class="cell cell-border" @click="inputNumber('7')">7</md-button>
+        <md-button class="cell cell-border" @click="inputNumber('8')">8</md-button>
+        <md-button class="cell cell-border" @click="inputNumber('9')">9</md-button>
+        <md-button class="md-raised md-primary cell" @click="makeOperation('multiply')">×</md-button>
+      </div>
+      <div class="d-flex">
+        <md-button class="cell cell-border" @click="inputNumber('4')">4</md-button>
+        <md-button class="cell cell-border" @click="inputNumber('5')">5</md-button>
+        <md-button class="cell cell-border" @click="inputNumber('6')">6</md-button>
+        <md-button class="md-raised md-primary cell" @click="makeOperation('subtract')">-</md-button>
+      </div>
+      <div class="d-flex">
+        <md-button class="cell cell-border" @click="inputNumber('1')">1</md-button>
+        <md-button class="cell cell-border" @click="inputNumber('2')">2</md-button>
+        <md-button class="cell cell-border" @click="inputNumber('3')">3</md-button>
+        <md-button class="md-raised md-primary cell" @click="makeOperation('add')">+</md-button>
+      </div>
+      <div class="d-flex">
+        <md-button class="cell cell-border cell-zero" @click="inputNumber('0')">0</md-button>
+        <md-button class="cell cell-border" @click="decimal">,</md-button>
+        <md-button class="md-raised md-primary cell" @click="calculation">=</md-button>
+      </div>
     </md-content>
-    <div class="d-flex">
-      <md-button class="md-primary cell cell-border" @click="allClean">AC</md-button>
-      <md-button class="md-primary cell cell-border" @click="changeSign">+/-</md-button>
-      <md-button class="md-primary cell cell-border" @click="percent">%</md-button>
-      <md-button class="md-raised md-primary cell" @click="makeOperation('divide')">÷</md-button>
-    </div>
-    <div class="d-flex">
-      <md-button class="cell cell-border" @click="inputNumber('7')">7</md-button>
-      <md-button class="cell cell-border" @click="inputNumber('8')">8</md-button>
-      <md-button class="cell cell-border" @click="inputNumber('9')">9</md-button>
-      <md-button class="md-raised md-primary cell" @click="makeOperation('multiply')">×</md-button>
-    </div>
-    <div class="d-flex">
-      <md-button class="cell cell-border" @click="inputNumber('4')">4</md-button>
-      <md-button class="cell cell-border" @click="inputNumber('5')">5</md-button>
-      <md-button class="cell cell-border" @click="inputNumber('6')">6</md-button>
-      <md-button class="md-raised md-primary cell" @click="makeOperation('subtract')">-</md-button>
-    </div>
-    <div class="d-flex">
-      <md-button class="cell cell-border" @click="inputNumber('1')">1</md-button>
-      <md-button class="cell cell-border" @click="inputNumber('2')">2</md-button>
-      <md-button class="cell cell-border" @click="inputNumber('3')">3</md-button>
-      <md-button class="md-raised md-primary cell" @click="makeOperation('add')">+</md-button>
-    </div>
-    <div class="d-flex">
-      <md-button class="cell cell-border cell-zero" @click="inputNumber('0')">0</md-button>
-      <md-button class="cell cell-border" @click="decimal">,</md-button>
-      <md-button class="md-raised md-primary cell" @click="calculation">=</md-button>
-    </div>
   </div>
 </template>
 
@@ -135,6 +137,7 @@ export default {
 
 .cell {
   width: 25%;
+  height: calc((100vh - 53px) / 5);
   margin: 0;
   font-size: 18px;
   background-color: lightgray;

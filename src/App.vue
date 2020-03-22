@@ -38,11 +38,16 @@ export default {
 
 .hist {
   width: 40%;
+  overflow: auto;
   border: 1px solid gray;
 }
 
 .d-flex {
   display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
 }
 
 .justify-content-end {
