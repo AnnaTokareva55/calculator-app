@@ -17,7 +17,7 @@ const historyStore = {
   },
   mutations: {
     LOAD_HISTORY(state, data) {
-      state.history = data;
+      state.history = Object.values(data);
     },
     ADD_OPERATION(state, newEl) {
       state.history.push(newEl);
@@ -25,12 +25,13 @@ const historyStore = {
   },
   actions: {
     getHistory({ commit }) {
-      axios.get("/api/history").then(response => {
-        commit("LOAD_HISTORY", response.data);
-      });
+      axios
+        .get("/api/history")
+        .then(response => commit("LOAD_HISTORY", response.data));
     },
-    addToHistory({ commit }, newEl) {
-      commit("ADD_OPERATION", newEl);
+    addToHistory: async ({ commit }, newEl) => {
+      let { data } = await axios.post("/api/history", { newEl });
+      if (data.result === 1) commit("ADD_OPERATION", newEl);
     }
   }
 };
