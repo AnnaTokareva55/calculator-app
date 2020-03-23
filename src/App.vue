@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="d-flex">
+    <div class="app d-flex">
       <Calculator class="calc" />
       <History class="hist" />
     </div>
@@ -52,5 +52,19 @@ export default {
 
 .justify-content-end {
   justify-content: flex-end;
+}
+
+@media screen and (max-width: 650px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .calc {
+    width: 100%;
+  }
+
+  .hist {
+    width: 100%;
+  }
 }
 </style>

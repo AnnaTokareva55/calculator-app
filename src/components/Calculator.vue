@@ -137,7 +137,7 @@ export default {
 
 .cell {
   width: 25%;
-  height: calc((100vh - 53px) / 5);
+  height: calc((100vh - 68px) / 5);
   margin: 0;
   font-size: 18px;
   background-color: lightgray;
@@ -147,5 +147,17 @@ export default {
 
 .cell-zero {
   width: 50%;
+}
+
+@media screen and (max-width: 650px) {
+  .result-field {
+    padding: 10px;
+    font-size: 34px;
+  }
+
+  .cell {
+    height: calc((60vh - 54px) / 5);
+    font-size: 16px;
+  }
 }
 </style>

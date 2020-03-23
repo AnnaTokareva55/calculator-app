@@ -35,9 +35,22 @@ export default {
 }
 
 .content {
-  height: calc(100vh - 53px);
+  height: calc(100vh - 68px);
   padding: 15px;
   text-align: left;
   font-size: 16px;
+}
+
+@media screen and (max-width: 650px) {
+  .title {
+    padding: 10px;
+    font-size: 34px;
+  }
+
+  .content {
+    height: calc(100vh - 54px);
+    padding: 10px;
+    font-size: 14px;
+  }
 }
 </style>
