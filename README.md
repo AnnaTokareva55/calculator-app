@@ -1,24 +1,12 @@
 # calculator-app
 
-## Project setup
-```
-npm install
-```
+Приложение "Калькулятор". Клиентская часть: Vue.js + Vuex. Реальзованы простейшие арифметические операции. Сборка - в папке dist.
+По клику на кнопку "=" осуществляется запись операции в журнал. Базу данных имитирует json-файл, который хранится на сервере. Серверная часть - в папке server (без сборки).
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Для просмотра приложения необходимо:
 
-### Compiles and minifies for production
-```
-npm run build
-```
+1. установить зависимости: npm install
+2. запустить сервер: npm run start
+3. перейти в браузере на http://localhost:3000/
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+По умолчанию сервер запускается на 3000 порту. Изменить порт можно в файле server/server.js.

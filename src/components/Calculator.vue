@@ -59,24 +59,39 @@ export default {
   },
   methods: {
     ...mapActions("history", ["addToHistory"]),
+    /**
+     * Очистка вспомогательных данных после нажатия на "=".
+     */
     _clean() {
       this.operationClicked = false;
       this.operation = null;
       this.prevResult = null;
     },
+    /**
+     * Полная очистка данных.
+     */
     allClean() {
       this.result = "0";
       this.operationClicked = false;
       this.operation = null;
       this.prevResult = null;
     },
+    /**
+     * Изменение знака.
+     */
     changeSign() {
       if (!this.result || this.result === "0") return;
       this.result = `${-1 * this.result}`;
     },
+    /**
+     * Расчет процента.
+     */
     percent() {
       this.result = `${parseFloat(this.result) / 100}`;
     },
+    /**
+     * Ввод цифры.
+     */
     inputNumber(value) {
       if (this.operationClicked) {
         this.result = "";
@@ -86,15 +101,24 @@ export default {
         this.result = value;
       } else this.result += value;
     },
+    /**
+     * Ввод запятой.
+     */
     decimal() {
       if (this.result === "") this.result += "0.";
       if (this.result.indexOf(".") === -1) this.result += ".";
     },
+    /**
+     * Начало операции - обработка нажатия на арифметический знак (+, -, *, /).
+     */
     makeOperation(operation) {
       this.operationClicked = true;
       this.operation = operation;
       this.prevResult = this.result;
     },
+    /**
+     * Расчет - обработка нажатия на знак "=".
+     */
     calculation() {
       if (!this.operation) return;
       let date = this.dateTime;
